@@ -36,8 +36,8 @@ def exibir_menu():
     print("MENU PRINCIPAL")
     exibir_linha()
     print("1 - Ver mensagem de boas-vindas")
-    print("2 - Listar aves")
-    print("3 - Ver detalhes de uma ave")
+    print("2 - Ver detalhes de uma ave")
+    print("3 - Listar aves")
     print("4 - Sobre a AveDex")
     print("0 - Sair")
 
@@ -78,6 +78,18 @@ def exibir_detalhes_ave(ave):
     print(f"Curiosidade: {ave.get('curiosidade', 'Não informada')}")
 
 
+def selecionar_ave_por_id(catalogo):
+    listar_aves(catalogo)
+    id_escolhido = input("\nDigite o ID da ave: ").strip()
+
+    ave_encontrada = buscar_ave_por_id(catalogo, id_escolhido)
+
+    if ave_encontrada is None:
+        print("Ave não encontrada. Confira o ID informado.")
+    else:
+        exibir_detalhes_ave(ave_encontrada)
+
+
 def mostrar_sobre():
     print()
     exibir_linha()
@@ -102,18 +114,10 @@ while True:
         mostrar_boas_vindas(nome_usuario)
 
     elif opcao_menu == "2":
-        listar_aves(catalogo_aves)
+        selecionar_ave_por_id(catalogo_aves)
 
     elif opcao_menu == "3":
         listar_aves(catalogo_aves)
-        id_escolhido = input("\nDigite o ID da ave: ").strip()
-
-        ave_encontrada = buscar_ave_por_id(catalogo_aves, id_escolhido)
-
-        if ave_encontrada:
-            exibir_detalhes_ave(ave_encontrada)
-        else:
-            print("Ave não encontrada. Confira o ID informado.")
 
     elif opcao_menu == "4":
         mostrar_sobre()
