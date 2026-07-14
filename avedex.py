@@ -65,17 +65,17 @@ def buscar_ave_por_id(catalogo, id_procurado):
     return None
 
 
-def exibir_detalhes(ave):
+def exibir_detalhes_ave(ave):
     print()
-    exibir_linha()
+    print("=" * 50)
     print("DETALHES DA AVE")
-    exibir_linha()
+    print("=" * 50)
     print(f"ID: {ave['id']}")
     print(f"Nome popular: {ave['nome_popular']}")
     print(f"Nome científico: {ave['nome_cientifico']}")
     print(f"Habitat: {ave['habitat']}")
     print(f"Alimentação: {ave['alimentacao']}")
-    print(f"Curiosidade: {ave['curiosidade']}")
+    print(f"Curiosidade: {ave.get('curiosidade', 'Não informada')}")
 
 
 def mostrar_sobre():
@@ -108,13 +108,10 @@ while True:
         listar_aves(catalogo_aves)
         id_escolhido = input("\nDigite o ID da ave: ").strip()
 
-        ave_encontrada = buscar_ave_por_id(
-            catalogo_aves,
-            id_escolhido
-        )
+        ave_encontrada = buscar_ave_por_id(catalogo_aves, id_escolhido)
 
-        if ave_encontrada is not None:
-            exibir_detalhes(ave_encontrada)
+        if ave_encontrada:
+            exibir_detalhes_ave(ave_encontrada)
         else:
             print("Ave não encontrada. Confira o ID informado.")
 
