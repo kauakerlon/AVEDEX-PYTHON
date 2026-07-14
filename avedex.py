@@ -1,6 +1,6 @@
 catalogo_aves = [
     {
-        "codigo": "1",
+        "id": 1,
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
         "habitat": "Áreas abertas, cidades e bordas de florestas",
@@ -8,7 +8,7 @@ catalogo_aves = [
         "curiosidade": "Seu canto lembra a expressão bem-te-vi."
     },
     {
-        "codigo": "2",
+        "id": 2,
         "nome_popular": "Canário-da-terra",
         "nome_cientifico": "Sicalis flaveola",
         "habitat": "Campos, áreas abertas e ambientes rurais",
@@ -16,7 +16,7 @@ catalogo_aves = [
         "curiosidade": "O macho possui plumagem amarela intensa."
     },
     {
-        "codigo": "3",
+        "id": 3,
         "nome_popular": "João-de-barro",
         "nome_cientifico": "Furnarius rufus",
         "habitat": "Campos, cidades e áreas rurais",
@@ -50,17 +50,17 @@ def mostrar_boas_vindas(nome_usuario):
 
 def listar_aves(catalogo):
     print()
-    exibir_linha()
+    print("=" * 50)
     print("AVES CADASTRADAS")
-    exibir_linha()
+    print("=" * 50)
 
     for ave in catalogo:
-        print(f"{ave['codigo']} - {ave['nome_popular']}")
+        print(f"{ave['id']} - {ave['nome_popular']}")
 
 
-def buscar_ave_por_codigo(catalogo, codigo_procurado):
+def buscar_ave_por_id(catalogo, id_procurado):
     for ave in catalogo:
-        if ave["codigo"] == codigo_procurado:
+        if str(ave["id"]) == id_procurado:
             return ave
     return None
 
@@ -70,6 +70,7 @@ def exibir_detalhes(ave):
     exibir_linha()
     print("DETALHES DA AVE")
     exibir_linha()
+    print(f"ID: {ave['id']}")
     print(f"Nome popular: {ave['nome_popular']}")
     print(f"Nome científico: {ave['nome_cientifico']}")
     print(f"Habitat: {ave['habitat']}")
@@ -78,7 +79,10 @@ def exibir_detalhes(ave):
 
 
 def mostrar_sobre():
-    print("Sobre a AveDex:")
+    print()
+    exibir_linha()
+    print("SOBRE A AVEDEX")
+    exibir_linha()
     print("A AveDex é um catálogo interativo de aves brasileiras.")
     print("Seu objetivo é apresentar informações sobre diferentes espécies.")
 
@@ -102,17 +106,17 @@ while True:
 
     elif opcao_menu == "3":
         listar_aves(catalogo_aves)
-        codigo_escolhido = input("\nDigite o código da ave: ").strip()
+        id_escolhido = input("\nDigite o ID da ave: ").strip()
 
-        ave_encontrada = buscar_ave_por_codigo(
+        ave_encontrada = buscar_ave_por_id(
             catalogo_aves,
-            codigo_escolhido
+            id_escolhido
         )
 
         if ave_encontrada is not None:
             exibir_detalhes(ave_encontrada)
         else:
-            print("Ave não encontrada. Confira o código informado.")
+            print("Ave não encontrada. Confira o ID informado.")
 
     elif opcao_menu == "4":
         mostrar_sobre()
