@@ -535,3 +535,41 @@ def buscar_aves(catalogo, termo_busca):
             resultados.append(ave)
 
     return resultados
+
+def exibir_comparacao_aves(ave_1, ave_2):
+    # Cabeçalho da comparação.
+    print()
+    print(linha("=", 78))
+    print("COMPARAÇÃO ENTRE AVES")
+    print(linha("=", 78))
+
+    # Primeira linha com o nome das aves.
+    imprimir_linha_comparacao(
+        "Campo",
+        ave_1["nome_popular"],
+        ave_2["nome_popular"]
+    )
+
+    print(linha("-", 78))
+
+    # Percorre todos os campos configurados em CAMPOS_COMPARACAO.
+    for rotulo, campo, unidade in CAMPOS_COMPARACAO:
+        # Obtém e formata o valor da primeira ave.
+        valor_1 = valor_ou_indisponivel(
+            ave_1.get(campo),
+            unidade
+        )
+
+        # Obtém e formata o valor da segunda ave.
+        valor_2 = valor_ou_indisponivel(
+            ave_2.get(campo),
+            unidade
+        )
+
+        # Imprime a linha já formatada.
+        imprimir_linha_comparacao(
+            rotulo,
+            valor_1,
+            valor_2
+        )
+
