@@ -1,7 +1,5 @@
 import unicodedata
 
-import unicodedata
-
 
 def normalizar_texto(texto):
     # Converte o valor recebido para texto.
@@ -480,3 +478,22 @@ CAMPOS_COMPARACAO = [
     ("Conservação", "status_conservacao", ""),
     ("Índice", "indice_conservacao", "")
 ]
+
+def linha(caractere="=", largura=LARGURA_TELA):
+    # Retorna uma linha formada pela repetição de um caractere.
+    return caractere * largura
+
+
+def titulo(texto):
+    # Exibe um título padronizado.
+    print()
+    print(linha("="))
+    print(texto)
+    print(linha("="))
+
+
+def mensagem_aviso(texto):
+    # Exibe uma mensagem simples de aviso.
+    print(f"[AVISO] {texto}")
+
+    titulo("AVES CADASTRADAS")
