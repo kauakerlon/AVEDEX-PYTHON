@@ -120,3 +120,24 @@ while opcao_menu != "0":
 
     if opcao_menu != "0":
         pausar()
+
+def buscar_aves_por_nome(catalogo, termo_busca):
+    # Criamos uma lista vazia para guardar as aves encontradas.
+    resultados = []
+
+    # Percorremos cada ave cadastrada no catálogo.
+    for ave in catalogo:
+        # Convertemos o nome da ave para minúsculas.
+        # Isso evita diferença entre "Bem" e "bem".
+        nome = ave["nome_popular"].lower()
+
+        # Também convertemos o termo digitado para minúsculas.
+        termo = termo_busca.lower()
+
+        # O operador "in" verifica se um texto aparece dentro de outro.
+        # Exemplo: "barro" está dentro de "joão-de-barro".
+        if termo in nome:
+            resultados.append(ave)
+
+    # Ao final, devolvemos a lista de aves encontradas.
+    return resultados
