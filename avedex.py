@@ -504,3 +504,34 @@ def exibir_menu():
     # Percorre a lista de opções e imprime uma por uma.
     for opcao in OPCOES_MENU:
         print(opcao)
+
+def criar_texto_busca(ave):
+    # Lista temporária que guardará os valores dos campos pesquisáveis.
+    valores = []
+    # Percorre cada campo definido em CAMPOS_BUSCA.
+    for campo in CAMPOS_BUSCA:
+        # Busca o valor do campo no dicionário da ave.
+        # Se o campo não existir, usa texto vazio.
+        valores.append(str(ave.get(campo, "")))
+    # Junta todos os valores em um único texto.
+    texto = " ".join(valores)
+    # Normaliza o texto para facilitar a busca.
+    return normalizar_texto(texto)
+
+def buscar_aves(catalogo, termo_busca):
+    # Lista que receberá as aves encontradas.
+    resultados = []
+
+    # Normaliza o termo digitado pelo usuário.
+    termo = normalizar_texto(termo_busca)
+
+    # Percorre todas as aves.
+    for ave in catalogo:
+        # Cria o texto pesquisável da ave.
+        texto_busca = criar_texto_busca(ave)
+
+        # Se o termo estiver no texto, adiciona a ave aos resultados.
+        if termo in texto_busca:
+            resultados.append(ave)
+
+    return resultados
