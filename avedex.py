@@ -27,7 +27,6 @@ def pausar():
 
 
 def exibir_menu():
-    # Mostra as opções disponíveis no sistema.
     print()
     print("=" * 50)
     print("AVEDEX - MENU PRINCIPAL")
@@ -35,7 +34,8 @@ def exibir_menu():
     print("1 - Listar aves")
     print("2 - Buscar ave")
     print("3 - Ver detalhes de uma ave")
-    print("4 - Sobre a AveDex")
+    print("4 - Comparar duas aves")
+    print("5 - Sobre a AveDex")
     print("0 - Sair")
 
 
@@ -252,19 +252,22 @@ while opcao_menu != "0":
         selecionar_ave_por_id(catalogo_aves)
 
     elif opcao_menu == "4":
+        comparar_duas_aves(catalogo_aves)
+
+    elif opcao_menu == "5":
         print("A AveDex é um catálogo interativo de aves.")
         print(
-            "Em breve, teremos comparação, imagens, sons "
-            "e dados em arquivo JSON."
-        )
+        "Em breve, teremos batalha, imagens, sons "
+        "e dados em arquivo JSON."
+    )
 
     elif opcao_menu == "0":
         print("Encerrando a AveDex. Até logo!")
 
     else:
         print(
-            "Opção inválida. Digite apenas 0, 1, 2, 3 ou 4."
-        )
+        "Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5."
+    )
 
     if opcao_menu != "0":
         pausar()
