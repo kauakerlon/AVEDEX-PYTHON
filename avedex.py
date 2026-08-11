@@ -10,8 +10,9 @@ def exibir_menu():
     print("AVEDEX - MENU PRINCIPAL")
     print("=" * 50)
     print("1 - Listar aves")
-    print("2 - Ver detalhes de uma ave")
-    print("3 - Sobre a AveDex")
+    print("2 - Buscar ave")
+    print("3 - Ver detalhes de uma ave")
+    print("4 - Sobre a AveDex")
     print("0 - Sair")
 
 
@@ -108,17 +109,20 @@ while opcao_menu != "0":
         listar_aves(catalogo_aves)
 
     elif opcao_menu == "2":
-        selecionar_ave_por_id(catalogo_aves)
+        tela_busca(catalogo_aves)
 
     elif opcao_menu == "3":
+        selecionar_ave_por_id(catalogo_aves)
+
+    elif opcao_menu == "4":
         print("A AveDex é um catálogo interativo de aves.")
-        print("Aos poucos, vamos adicionar busca, comparação, documentação e testes.")
+        print("Em breve, teremos comparação, imagens, sons e dados em arquivo JSON.")
 
     elif opcao_menu == "0":
         print("Encerrando a AveDex. Até logo!")
 
     else:
-        print("Opção inválida. Digite apenas 0, 1, 2 ou 3.")
+        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
 
     if opcao_menu != "0":
         pausar()
@@ -189,3 +193,52 @@ def buscar_aves(catalogo, termo_busca):
             resultados.append(ave)
 
     return resultados
+
+def exibir_resultados_busca(resultados):
+    print()
+    print("=" * 50)
+    print("RESULTADOS DA BUSCA")
+    print("=" * 50)
+
+    # Se a lista estiver vazia, nada foi encontrado.
+    if len(resultados) == 0:
+        print("Nenhuma ave encontrada.")
+    else:
+        # Se houver resultados, mostramos cada ave encontrada.
+        for ave in resultados:
+            print(
+                f"{ave['id']} - {ave['nome_popular']} "
+                f"({ave['familia']}, {ave['dieta_tipo']})"
+            )
+
+def tela_busca(catalogo):
+    # Pedimos ao usuário o texto que deseja procurar.
+    termo = input("Digite parte do nome, família, ordem ou dieta: ").strip()
+
+    # Se o usuário apenas apertar ENTER, não faz sentido buscar.
+    if termo == "":
+        print("Digite algum texto para realizar a busca.")
+        return
+
+    # Chamamos a função que faz a busca.
+    resultados = buscar_aves(catalogo, termo)
+
+    # Exibimos os resultados encontrados.
+    exibir_resultados_busca(resultados)
+
+    # Se existir pelo menos um resultado, damos a opção
+    # de abrir os detalhes de uma ave encontrada.
+    if len(resultados) > 0:
+        escolha = input(
+            "\nDigite o ID para ver detalhes ou ENTER para voltar: "
+        ).strip()
+
+        if escolha != "":
+            # Aqui buscamos apenas dentro da lista de resultados.
+            # Assim, o usuário só abre uma ave que realmente apareceu na busca.
+            ave_encontrada = buscar_ave_por_id(resultados, escolha)
+
+            if ave_encontrada is None:
+                print("ID não encontrado nos resultados.")
+            else:
+                exibir_detalhes_ave(ave_encontrada)
