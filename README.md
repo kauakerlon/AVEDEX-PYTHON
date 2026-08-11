@@ -29,9 +29,20 @@ Boas Práticas de Programação.
 - [x] Tratamento de ID inexistente na comparação
 - [x] Comparação da mesma ave com ela mesma
 - [x] Opção inválida no menu
+## Testes de regressão
+- [ ] Listar aves
+- [ ] Buscar por parte do nome
+- [ ] Buscar por família
+- [ ] Buscar por ordem
+- [ ] Buscar por dieta
+- [ ] Ver detalhes por ID
+- [ ] Comparar duas aves
+- [ ] Tratar ID inexistente
+- [ ] Tratar opção inválida no menu
+- [ ] Encerrar o programa
 ## Como executar
 ```bash
 python avedex.py
 ```
-## Auto
+## Autor
 kauã kerlon pinto de paula.
