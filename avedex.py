@@ -497,3 +497,10 @@ def mensagem_aviso(texto):
     print(f"[AVISO] {texto}")
 
     titulo("AVES CADASTRADAS")
+
+def exibir_menu():
+    # Exibe o título do menu.
+    titulo("AVEDEX - MENU PRINCIPAL")
+    # Percorre a lista de opções e imprime uma por uma.
+    for opcao in OPCOES_MENU:
+        print(opcao)
