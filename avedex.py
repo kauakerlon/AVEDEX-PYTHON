@@ -268,3 +268,16 @@ while opcao_menu != "0":
 
     if opcao_menu != "0":
         pausar()
+
+def valor_ou_indisponivel(valor, unidade=""):
+        # Se o valor for None ou texto vazio, informamos isso ao usuário.
+        if valor is None or valor == "":
+            return "Não informado"
+        
+        # Se uma unidade foi informada, adicionamos essa unidade ao valor.
+        # Exemplo: valor 23 com unidade "cm" vira "23 cm".
+        if unidade != "":
+            return f"{valor} {unidade}"
+        
+        # Se não houver unidade, retornamos o valor como texto.
+            return str(valor)
