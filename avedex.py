@@ -573,3 +573,28 @@ def exibir_comparacao_aves(ave_1, ave_2):
             valor_2
         )
 
+def cortar_texto(texto, tamanho=25):
+    # Se o texto não existir, retornamos uma mensagem padrão.
+    if texto is None:
+        return "Não informado"
+
+    # Garantimos que o valor será tratado como texto.
+    texto = str(texto).strip()
+
+    # Se o texto já couber no tamanho definido, retornamos sem alteração.
+    if len(texto) <= tamanho:
+        return texto
+
+    # Se for longo demais, cortamos e adicionamos reticências.
+    return texto[:tamanho - 3] + "..."
+
+def preparar_valor_comparacao(ave, campo, unidade):
+    # Busca o valor original da ave.
+    valor = ave.get(campo)
+
+    # Habitat costuma ser longo, então cortamos para não quebrar a tabela.
+    if campo == "habitat":
+        return cortar_texto(valor, 25)
+
+    # Os demais campos usam a função padrão.
+    return valor_ou_indisponivel(valor, unidade)
