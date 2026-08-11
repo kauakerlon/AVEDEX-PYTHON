@@ -13,7 +13,8 @@ def normalizar_texto(texto):
 
     # Remove os acentos e mantém apenas as letras.
     texto = "".join(
-        caractere for caractere in texto
+        caractere
+        for caractere in texto
         if unicodedata.category(caractere) != "Mn"
     )
 
@@ -140,7 +141,9 @@ def exibir_resultados_busca(resultados):
 
 def tela_busca(catalogo):
     # Solicita o termo de busca.
-    termo = input("Digite parte do nome, família, ordem ou dieta: ").strip()
+    termo = input(
+        "Digite parte do nome, família, ordem ou dieta: "
+    ).strip()
 
     if termo == "":
         print("Digite algum texto para realizar a busca.")
@@ -167,13 +170,36 @@ def tela_busca(catalogo):
 
 catalogo_aves = [
     {
+        # ID único da ave.
         "id": 1,
+
+        # Nomes da ave.
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
+
+        # Classificação.
         "ordem": "Passeriformes",
         "familia": "Tyrannidae",
+
+        # Tipo principal de dieta.
         "dieta_tipo": "Onívora",
+
+        # Ambiente onde a ave costuma viver.
         "habitat": "Áreas abertas, cidades e bordas de florestas",
+
+        # Medidas aproximadas usadas na comparação.
+        "comprimento_cm": 23,
+        "peso_g": 68,
+
+        # Situação de conservação.
+        # Nesta versão didática, usamos texto simples.
+        "status_conservacao": "Pouco preocupante",
+
+        # Índice numérico que será útil futuramente na batalha.
+        # Quanto maior, maior será o nível de atenção na conservação.
+        "indice_conservacao": 1,
+
+        # Outros detalhes.
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto parece dizer o próprio nome."
     },
@@ -185,6 +211,10 @@ catalogo_aves = [
         "familia": "Furnariidae",
         "dieta_tipo": "Insetívora",
         "habitat": "Campos, cidades e áreas rurais",
+        "comprimento_cm": 20,
+        "peso_g": 49,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Insetos e outros invertebrados",
         "curiosidade": "É conhecido por construir ninhos de barro."
     },
@@ -196,10 +226,15 @@ catalogo_aves = [
         "familia": "Thraupidae",
         "dieta_tipo": "Granívora",
         "habitat": "Campos e áreas abertas",
+        "comprimento_cm": 13,
+        "peso_g": 20,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Sementes e pequenos insetos",
         "curiosidade": "Possui canto forte e melodioso."
     }
 ]
+
 
 opcao_menu = ""
 
@@ -218,13 +253,18 @@ while opcao_menu != "0":
 
     elif opcao_menu == "4":
         print("A AveDex é um catálogo interativo de aves.")
-        print("Em breve, teremos comparação, imagens, sons e dados em arquivo JSON.")
+        print(
+            "Em breve, teremos comparação, imagens, sons "
+            "e dados em arquivo JSON."
+        )
 
     elif opcao_menu == "0":
         print("Encerrando a AveDex. Até logo!")
 
     else:
-        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
+        print(
+            "Opção inválida. Digite apenas 0, 1, 2, 3 ou 4."
+        )
 
     if opcao_menu != "0":
         pausar()
