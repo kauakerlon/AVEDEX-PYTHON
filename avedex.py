@@ -1,3 +1,5 @@
+import unicodedata
+
 def pausar():
     input("\nPressione ENTER para voltar ao menu...")
 
@@ -122,22 +124,35 @@ while opcao_menu != "0":
         pausar()
 
 def buscar_aves_por_nome(catalogo, termo_busca):
-    # Criamos uma lista vazia para guardar as aves encontradas.
     resultados = []
 
-    # Percorremos cada ave cadastrada no catálogo.
+    # Normalizamos o termo digitado pelo usuário.
+    termo = normalizar_texto(termo_busca)
+
     for ave in catalogo:
-        # Convertemos o nome da ave para minúsculas.
-        # Isso evita diferença entre "Bem" e "bem".
-        nome = ave["nome_popular"].lower()
+        # Normalizamos também o nome cadastrado.
+        nome = normalizar_texto(ave["nome_popular"])
 
-        # Também convertemos o termo digitado para minúsculas.
-        termo = termo_busca.lower()
-
-        # O operador "in" verifica se um texto aparece dentro de outro.
-        # Exemplo: "barro" está dentro de "joão-de-barro".
         if termo in nome:
             resultados.append(ave)
 
-    # Ao final, devolvemos a lista de aves encontradas.
     return resultados
+
+def normalizar_texto(texto):
+    # Garante que o valor recebido será tratado como texto.
+    texto = str(texto)
+
+    # Converte para minúsculas e remove espaços no início e no final.
+    texto = texto.lower().strip()
+
+    # Separa as letras dos sinais de acentuação.
+    # Exemplo: "á" passa a ser tratado como "a" + acento.
+    texto = unicodedata.normalize("NFD", texto)
+
+    # Monta um novo texto removendo os sinais de acentuação.
+    texto = "".join(
+        caractere for caractere in texto
+        if unicodedata.category(caractere) != "Mn"
+    )
+
+    return texto
