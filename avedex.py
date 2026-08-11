@@ -156,3 +156,36 @@ def normalizar_texto(texto):
     )
 
     return texto
+
+def buscar_aves(catalogo, termo_busca):
+    # Lista que receberá todas as aves encontradas.
+    resultados = []
+
+    # Normalizamos o termo digitado uma única vez.
+    termo = normalizar_texto(termo_busca)
+
+    # Percorremos todas as aves do catálogo.
+    for ave in catalogo:
+        # Separamos os campos em que a busca será feita.
+        # Usamos get() para evitar erro caso alguma chave esteja ausente.
+        campos_busca = [
+            ave.get("nome_popular", ""),
+            ave.get("nome_cientifico", ""),
+            ave.get("familia", ""),
+            ave.get("ordem", ""),
+            ave.get("dieta_tipo", "")
+        ]
+
+        # Juntamos todos os campos em um único texto.
+        # Assim, a busca pode procurar em todos eles de uma vez.
+        texto_busca = " ".join(campos_busca)
+
+        # Normalizamos o texto completo da ave.
+        texto_busca = normalizar_texto(texto_busca)
+
+        # Se o termo digitado estiver no texto da ave,
+        # adicionamos essa ave aos resultados.
+        if termo in texto_busca:
+            resultados.append(ave)
+
+    return resultados
