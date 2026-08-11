@@ -17,4 +17,4 @@ Boas Práticas de Programação.
 python avedex.py
 ```
 ## Autor
-kauã kerlon pinto de paula
+kauã kerlon pinto de paula.
