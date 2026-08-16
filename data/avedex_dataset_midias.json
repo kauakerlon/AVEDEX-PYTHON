@@ -1,3 +1,4 @@
+
 {
     "nome_dataset": "AveDex",
     "versao": "1.0",
@@ -85,11 +86,11 @@
             "alimentacao": "Sementes e pequenos insetos.",
             "curiosidade": "É bastante reconhecido pelo canto.",
             "midia": {
-                "pagina_guia": null,
-                "fotografo": "",
-                "wikiaves_url": "",
-                "som_url": "",
-                "imagem_url": ""
+                "pagina_guia": 25,
+                "fotografo": "Nome do fotógrafo ou da fonte",
+                "wikiaves_url": "https://pagina-com-informacoes-da-ave",
+                "som_url": "https://servidor/arquivo-de-som.mp3",
+                "imagem_url": "https://servidor/imagem-da-ave.jpg"
             }
         }
     ]
