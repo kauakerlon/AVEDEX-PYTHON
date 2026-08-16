@@ -22,10 +22,19 @@ def titulo(texto):
     print(linha("="))
 
 
-def mensagem_aviso(texto):
-    # Exibe uma mensagem simples de aviso.
+def mensagem_sucesso(texto):
+    # Mostra uma mensagem positiva para o usuário.
+    print(f"[OK] {texto}")
 
+
+def mensagem_aviso(texto):
+    # Mostra uma mensagem de atenção.
     print(f"[AVISO] {texto}")
+
+
+def mensagem_erro(texto):
+    # Mostra uma mensagem de erro.
+    print(f"[ERRO] {texto}")
 
 
 def pausar():
@@ -84,3 +93,8 @@ def cortar_texto(texto, tamanho=25):
         return texto
 
     return texto[:tamanho - 3] + "..."
+
+if __name__ == "__main__":
+    mensagem_sucesso("Teste de sucesso")
+    mensagem_aviso("Teste de aviso")
+    mensagem_erro("Teste de erro")
