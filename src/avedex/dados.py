@@ -3,7 +3,7 @@ from pathlib import Path
 
 from src.avedex.utils import mensagem_erro
 
-# __file__ representa o caminho deste arquivo dados.py.
+# __file__ representa o caminho deste arquivo dados.py..
 #
 # Como dados.py está em src/avedex/dados.py, usamos parents[2]
 # para chegar à raiz do projeto.
