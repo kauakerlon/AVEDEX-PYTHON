@@ -1,4 +1,5 @@
 
+
 import json
 from pathlib import Path
 
@@ -50,3 +51,12 @@ def obter_fontes_globais():
     # Retorna as fontes gerais cadastradas no JSON.
 
     return dataset.get("fontes_globais", {})
+
+
+if __name__ == "__main__":
+    aves = carregar_aves()
+
+    print(f"Total de aves carregadas: {len(aves)}")
+
+    for ave in aves:
+        print(ave["nome_popular"])
