@@ -1,18 +1,54 @@
-from src.avedex.catalogo import listar_aves, buscar_aves, tela_detalhes
+"""Fluxo principal da aplicação AveDex."""
+
+from src.avedex.ambiente import verificar_ambiente
+from src.avedex.batalha import batalha_avedex
+from src.avedex.catalogo import (
+    buscar_aves,
+    escolher_ave,
+    listar_aves,
+    mostrar_ave_aleatoria,
+    tela_detalhes,
+)
 from src.avedex.comparacao import comparar_aves
 from src.avedex.creditos import mostrar_creditos
-from src.avedex.dados import carregar_aves
-from src.avedex.interface import abertura, exibir_menu_principal
-from src.avedex.utils import pausar, mensagem_aviso
 from src.avedex.dados import carregar_aves, validar_dataset
-from src.avedex.ambiente import verificar_ambiente
+from src.avedex.interface import abertura, exibir_menu_principal
+from src.avedex.multimidia import tocar_som, visualizar_imagem
+from src.avedex.utils import (
+    Cor,
+    colorir,
+    limpar_tela,
+    mensagem_aviso,
+    pausar,
+)
+
+
+def selecionar_e_visualizar_imagem(aves):
+    """Permite escolher uma ave e chama a visualização de imagem."""
+    ave = escolher_ave(
+        aves,
+        "Escolha uma ave para visualizar a imagem",
+    )
+
+    if ave is not None:
+        visualizar_imagem(ave)
+
+
+def selecionar_e_tocar_som(aves):
+    """Permite escolher uma ave e chama a reprodução de som."""
+    ave = escolher_ave(
+        aves,
+        "Escolha uma ave para ouvir o som",
+    )
+
+    if ave is not None:
+        tocar_som(ave)
 
 
 def executar():
-    # Carrega a lista de aves a partir do JSON.
+    """Carrega os dados, valida o dataset e mantém o menu em execução."""
     aves = carregar_aves()
 
-    # Se a lista estiver vazia, não há o que exibir.
     if not aves:
         mensagem_aviso(
             "Nenhuma ave foi carregada. "
@@ -20,11 +56,9 @@ def executar():
         )
         return
 
-    # Valida o conteúdo do dataset.
     problemas = validar_dataset(aves)
 
-    # Se existirem problemas, mostramos todos e encerramos.
-    if len(problemas) > 0:
+    if problemas:
         mensagem_aviso(
             "Foram encontrados problemas no dataset:"
         )
@@ -37,17 +71,21 @@ def executar():
         mensagem_aviso(
             "Corrija o arquivo JSON antes de continuar."
         )
-
         return
 
-    # Se chegou até aqui, os dados passaram pela validação.
     abertura(aves)
+    pausar()
 
-    # Depois disso, continua o while do menu principal.
     while True:
+        limpar_tela()
         exibir_menu_principal()
 
-        opcao = input("Escolha uma opção: ").strip()
+        opcao = input(
+            colorir(
+                "Escolha uma opção: ",
+                Cor.CIANO,
+            )
+        ).strip()
 
         if opcao == "1":
             listar_aves(aves)
@@ -58,23 +96,45 @@ def executar():
             pausar()
 
         elif opcao == "3":
-            tela_detalhes(aves)
+            mostrar_ave_aleatoria(aves)
             pausar()
 
         elif opcao == "4":
-            comparar_aves(aves)
+            tela_detalhes(aves)
             pausar()
 
         elif opcao == "5":
-            mostrar_creditos()
+            comparar_aves(aves)
             pausar()
 
         elif opcao == "6":
-             verificar_ambiente()
-             pausar()   
+            batalha_avedex(aves)
+            pausar()
+
+        elif opcao == "7":
+            selecionar_e_visualizar_imagem(aves)
+            pausar()
+
+        elif opcao == "8":
+            selecionar_e_tocar_som(aves)
+            pausar()
+
+        elif opcao == "9":
+            verificar_ambiente()
+            pausar()
+
+        elif opcao == "10":
+            mostrar_creditos()
+            pausar()
 
         elif opcao == "0":
-            print("Encerrando a AveDex. Até logo!")
+            limpar_tela()
+            print(
+                colorir(
+                    "Obrigado por usar a AveDex!",
+                    Cor.VERDE,
+                )
+            )
             break
 
         else:
